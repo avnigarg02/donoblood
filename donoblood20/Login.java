@@ -47,6 +47,18 @@ public class Login {
         String[] q = info.split(" ", 0);
         users.put(q[0], Node.parseNode(q[1]));
     }
+    
+    public static void saveInfo(String file) throws Exception {
+        PrintWriter out = new PrintWriter(file);
+        out.println(toStr());
+    }
+
+    public static void getInfo(String file) throws Exception {
+        Scanner in = new Scanner(new FileReader(file));
+        while (in.hasNextLine()) {
+            addEntry(in.nextLine());
+        }
+    }
 
 }
 
