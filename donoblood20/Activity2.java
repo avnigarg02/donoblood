@@ -21,7 +21,7 @@ public class Activity2 extends AppCompatActivity {
         setContentView(R.layout.activity_2);
 
 
-        //TextView emailSignUp = (TextView) findViewById(R.id.emailSignUp);
+        TextView emailSignUp = (TextView) findViewById(R.id.emailSignUp);
         TextView password = (TextView) findViewById(R.id.password);
         TextView passwordConfirmation = (TextView) findViewById(R.id.passwordConfirmation);
 
@@ -34,6 +34,7 @@ public class Activity2 extends AppCompatActivity {
             public void onClick(View view) {
                 if (password.getText().toString().equals(passwordConfirmation.getText().toString())){
                     //correct
+                    trySignUp(emailSignUp.getText().toString(),password.getText().toString());
                     Toast.makeText(Activity2.this, "SIGN UP SUCCESSFUL", Toast.LENGTH_SHORT).show();
                     openActivity3();
                 } else {
@@ -48,4 +49,15 @@ public class Activity2 extends AppCompatActivity {
         Intent intent = new Intent(this, Activity3.class);
         startActivity(intent);
     }
+    public Node trySignUp(String user, String pass) {
+        Node signedUp = Login.signUp(user, pass);
+        if (signedUp == null) {
+            Toast.makeText(Activity2.this, "SIGN UP FAIL Check Username taken", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(Activity2.this, "SIGN UP SUCCESSFUL", Toast.LENGTH_SHORT).show();
+            openActivity3();
+        }
+        return signedUp;
+    }
+
 }
